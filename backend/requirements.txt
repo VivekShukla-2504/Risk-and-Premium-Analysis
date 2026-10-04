@@ -1,0 +1,9 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pandas>=2.2
+numpy>=1.26
+pydantic>=2.6
+python-dotenv>=1.0
+# Optional: MongoDB Atlas source (app falls back to the cleaned CSV without it)
+# pymongo[srv]>=4.6
+# Dev / tests: pytest>=8.0, httpx2>=2.13.1 (FastAPI TestClient transport in current Starlette), scipy (only used to cross-check statistics in tests)
