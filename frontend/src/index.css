@@ -8,6 +8,7 @@
   }
   body {
     @apply bg-paper font-sans text-[15px] leading-relaxed text-ink antialiased;
+    font-feature-settings: "ss01" on;
   }
   :focus-visible {
     outline: 2px solid #16607a;
@@ -25,12 +26,21 @@
 
 @layer components {
   .control {
-    @apply w-full rounded-panel border border-rule bg-white px-2.5 py-1.5 text-sm text-ink;
+    @apply w-full rounded-panel border border-rule bg-panel px-3 py-2 text-sm text-ink shadow-sm transition-colors;
+  }
+  .control:hover {
+    @apply border-muted/60;
+  }
+  .control:focus {
+    @apply border-brand outline-none ring-2 ring-brand/10;
   }
   .btn {
-    @apply inline-flex items-center justify-center rounded-panel border border-rule bg-white px-3 py-1.5 text-sm font-medium text-ink hover:bg-paper disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-panel border border-rule bg-panel px-3.5 py-2 text-sm font-medium text-ink shadow-sm transition-colors hover:border-muted/60 hover:bg-paper disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-panel border border-brand bg-brand px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-panel border border-brand bg-brand px-3.5 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .eyebrow {
+    @apply text-[10px] font-semibold uppercase tracking-[0.16em] text-muted;
   }
 }

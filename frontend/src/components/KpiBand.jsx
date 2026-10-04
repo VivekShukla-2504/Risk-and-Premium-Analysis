@@ -21,15 +21,15 @@ function extra(kpi, data, rateMetricsValid) {
 export default function KpiBand({ data, meta }) {
   const valid = meta.rate_metrics_valid;
   return (
-    <section aria-label="Key figures" className="overflow-hidden rounded-panel border border-rule bg-rule">
-      <dl className="grid grid-cols-2 gap-px lg:grid-cols-4">
+    <section aria-label="Key figures">
+      <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {data.kpis.map((kpi) => {
           const stale = kpi.rate_metric && !valid;
           const decimals = kpi.key === 'average_claim_severity' ? 2 : 0;
           const note = extra(kpi, data, valid);
           return (
-            <div key={kpi.key} className="min-w-0 bg-panel px-4 py-4 sm:px-5">
-              <dt className="text-[13px] text-muted">{kpi.label}</dt>
+            <div key={kpi.key} className="min-w-0 rounded-panel border border-rule border-t-[3px] border-t-brand/70 bg-panel px-4 py-4 shadow-[0_1px_2px_rgba(29,43,38,0.035)] sm:px-5">
+              <dt className="text-[11px] font-medium uppercase tracking-[0.1em] text-muted">{kpi.label}</dt>
               <dd
                 className={`mt-1.5 truncate font-serif text-[1.65rem] leading-none tabular-nums sm:text-[1.85rem] ${stale ? 'text-muted line-through decoration-ochre' : 'text-ink'}`}
                 title={stale ? 'Not meaningful: the current filters select policies by claim outcome.' : undefined}

@@ -28,38 +28,44 @@ export default function FilterBar() {
   const range = options && (filters.date_basis === 'claim_date' ? options.claim_date_range : options.policy_start_date_range);
 
   return (
-    <form className="border-b border-rule bg-panel" aria-label="Portfolio filters" onSubmit={(e) => e.preventDefault()}>
-      <div className="grid grid-cols-2 gap-x-3 gap-y-2.5 px-4 py-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-[repeat(7,minmax(0,1fr))_auto] xl:items-end sm:px-6">
-        <Field id="f-type" label="Policy type">
-          <Select id="f-type" value={filters.policy_type} onChange={(v) => setFilter('policy_type', v)} options={options?.policy_type} />
-        </Field>
-        <Field id="f-gender" label="Gender">
-          <Select id="f-gender" value={filters.gender} onChange={(v) => setFilter('gender', v)} options={options?.gender} />
-        </Field>
-        <Field id="f-age" label="Age band">
-          <Select id="f-age" value={filters.age_band} onChange={(v) => setFilter('age_band', v)} options={options?.age_band} />
-        </Field>
-        <Field id="f-status" label="Claim status">
-          <Select id="f-status" value={filters.claim_status} onChange={(v) => setFilter('claim_status', v)} options={options?.claim_status} />
-        </Field>
-        <Field id="f-basis" label="Date range applies to">
-          <select id="f-basis" className="control" value={filters.date_basis} onChange={(e) => setFilter('date_basis', e.target.value)}>
-            {(options?.date_basis || Object.keys(BASIS_LABELS)).map((b) => (
-              <option key={b} value={b}>{BASIS_LABELS[b] || b}</option>
-            ))}
-          </select>
-        </Field>
-        <Field id="f-start" label="From">
-          <input id="f-start" type="date" className="control" value={filters.start_date} min={range?.[0]} max={range?.[1]} onChange={(e) => setFilter('start_date', e.target.value)} />
-        </Field>
-        <Field id="f-end" label="To">
-          <input id="f-end" type="date" className="control" value={filters.end_date} min={range?.[0]} max={range?.[1]} onChange={(e) => setFilter('end_date', e.target.value)} />
-        </Field>
-        <div className="col-span-2 flex items-center gap-3 sm:col-span-3 lg:col-span-4 xl:col-span-1">
-          <button type="button" className="btn" onClick={reset} disabled={activeCount === 0 && !filters.start_date && !filters.end_date}>
-            Reset filters
-          </button>
-          {activeCount > 0 && <span className="text-xs text-muted">{activeCount} active</span>}
+    <form className="border-b border-rule bg-[#F8F7F2]" aria-label="Portfolio filters" onSubmit={(e) => e.preventDefault()}>
+      <div className="mx-auto max-w-[1720px] px-4 pb-4 pt-3 sm:px-6 lg:px-8">
+        <div className="mb-3 flex items-center gap-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden="true" />
+          <p className="eyebrow">Portfolio scope</p>
+          {activeCount > 0 && <span className="rounded-full bg-brand-tint px-2 py-0.5 text-[10px] font-medium text-brand-dark">{activeCount} active</span>}
+        </div>
+        <div className="grid grid-cols-2 gap-x-3 gap-y-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-[repeat(7,minmax(0,1fr))_auto] xl:items-end">
+          <Field id="f-type" label="Policy type">
+            <Select id="f-type" value={filters.policy_type} onChange={(v) => setFilter('policy_type', v)} options={options?.policy_type} />
+          </Field>
+          <Field id="f-gender" label="Gender">
+            <Select id="f-gender" value={filters.gender} onChange={(v) => setFilter('gender', v)} options={options?.gender} />
+          </Field>
+          <Field id="f-age" label="Age band">
+            <Select id="f-age" value={filters.age_band} onChange={(v) => setFilter('age_band', v)} options={options?.age_band} />
+          </Field>
+          <Field id="f-status" label="Claim status">
+            <Select id="f-status" value={filters.claim_status} onChange={(v) => setFilter('claim_status', v)} options={options?.claim_status} />
+          </Field>
+          <Field id="f-basis" label="Date range applies to">
+            <select id="f-basis" className="control" value={filters.date_basis} onChange={(e) => setFilter('date_basis', e.target.value)}>
+              {(options?.date_basis || Object.keys(BASIS_LABELS)).map((b) => (
+                <option key={b} value={b}>{BASIS_LABELS[b] || b}</option>
+              ))}
+            </select>
+          </Field>
+          <Field id="f-start" label="From">
+            <input id="f-start" type="date" className="control" value={filters.start_date} min={range?.[0]} max={range?.[1]} onChange={(e) => setFilter('start_date', e.target.value)} />
+          </Field>
+          <Field id="f-end" label="To">
+            <input id="f-end" type="date" className="control" value={filters.end_date} min={range?.[0]} max={range?.[1]} onChange={(e) => setFilter('end_date', e.target.value)} />
+          </Field>
+          <div className="col-span-2 flex items-center gap-3 sm:col-span-3 lg:col-span-4 xl:col-span-1">
+            <button type="button" className="btn" onClick={reset} disabled={activeCount === 0 && !filters.start_date && !filters.end_date}>
+              Reset filters
+            </button>
+          </div>
         </div>
       </div>
       {(error || optionsError) && (
