@@ -34,7 +34,10 @@ class Settings:
 @lru_cache
 def get_settings() -> Settings:
     data_path = Path(os.getenv("DATA_PATH", BACKEND_DIR / "data" / "InsuranceData.csv"))
-    origins = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173")
+    origins = os.getenv(
+        "CORS_ORIGINS",
+        "http://localhost:5173,http://127.0.0.1:5173,https://risk-and-premium-analysis.vercel.app",
+    )
     source = os.getenv("DATA_SOURCE", "auto").strip().lower()
     if source not in {"auto", "csv"}:
         raise ValueError("DATA_SOURCE must be 'auto' or 'csv'")

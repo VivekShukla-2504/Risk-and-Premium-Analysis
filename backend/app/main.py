@@ -49,7 +49,8 @@ app = FastAPI(title="Insurance Risk & Premium Analytics API", version="0.3.0", d
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_settings().cors_origins,
-    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_origin_regex=r"^https://.*\.vercel\.app$",
+    allow_methods=["*"],
     allow_headers=["*"],
     expose_headers=["Content-Disposition"],
 )
